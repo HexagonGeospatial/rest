@@ -27,7 +27,10 @@
 					wire(typeof interceptorDef === 'string' ? { module: interceptorDef } : interceptorDef),
 					wire(interceptorConfig)
 				]).spread(function (interceptor, config) {
-				    interceptorDef.config = interceptorConfig;
+					if (typeof interceptorDef !== 'string') {
+						interceptorDef.config = interceptorConfig;
+					}
+
 					return { interceptor: interceptor, config: config };
 				});
 			}));
